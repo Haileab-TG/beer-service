@@ -1,4 +1,4 @@
-package io.haileab.beerservice.web.model;
+package io.haileab.beerservice.bootstrap;
 
 import java.util.UUID;
 
