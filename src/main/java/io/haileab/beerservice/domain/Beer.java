@@ -8,7 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -44,7 +43,7 @@ public class Beer {
     private Long upc;
 
     private BigDecimal price;
-    private Integer minOnHand;
+    private Integer quantityOnHand;
     private Integer quantityToBrew;
 
 }

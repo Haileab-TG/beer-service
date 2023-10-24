@@ -1,33 +1,33 @@
 package io.haileab.beerservice.web.controller;
 
+import io.haileab.beerservice.service.BeerService;
 import io.haileab.beerservice.web.model.BeerDTO;
-import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("api/v1/beer")
 @RestController
 @Validated //validates the method level @NotNull Validation
+@RequiredArgsConstructor
 public class BeerController {
+    private final BeerService beerService;
 
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDTO> getBeerById(@NotNull @PathVariable("beerId") UUID beerId){
-        //todo impl
-        return new ResponseEntity<>(BeerDTO.builder().build(), HttpStatus.OK);
+        return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity saveNewBeer(@NotNull @Valid @RequestBody BeerDTO beerDTO){
         //@Valid validaties the Beer DTO bean validaitons
-        //todo impl
+        beerService.save(beerDTO);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
@@ -38,7 +38,7 @@ public class BeerController {
                 @NotNull @PathVariable("beerId") UUID beerId,
                 @NotNull @Valid @RequestBody BeerDTO beerDTO
             ){
-        //todo impl
+        beerService.updateById(beerId, beerDTO);
     }
 
 
