@@ -27,7 +27,7 @@ public class BeerController {
 
     @GetMapping("/beerByUpc/{upc}")
     public ResponseEntity<BeerDTO> getBeerByUPC(
-            @NotNull @PathVariable("upc") Long upc,
+            @NotNull @PathVariable("upc") String upc,
             @RequestParam(value = "showInventory",  required = false) boolean showInventory
     ){
         return new ResponseEntity<>(beerService.getBeerByUPC(upc, showInventory), HttpStatus.OK);

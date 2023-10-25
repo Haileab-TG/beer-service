@@ -95,7 +95,7 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
-    public BeerDTO getBeerByUPC(Long upc, boolean showInventory) {
+    public BeerDTO getBeerByUPC(String upc, boolean showInventory) {
         BeerMapperType mapperToUse = showInventory ? beerMapperWithDecorator : beerMapper;
         return mapperToUse.toBeerDto(beerRepo.findBeerByUpc(upc));
     }

@@ -44,7 +44,7 @@ public class Beer {
     private BeerStyleEnum beerStyle;
 
     @Column(unique = true)
-    private Long upc;
+    private String upc;
 
     private BigDecimal price;
     private Integer quantityOnHand;

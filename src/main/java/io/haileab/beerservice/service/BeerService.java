@@ -21,5 +21,5 @@ public interface BeerService {
             boolean showInventory
     );
 
-    BeerDTO getBeerByUPC(Long upc, boolean showInventory);
+    BeerDTO getBeerByUPC(String upc, boolean showInventory);
 }
