@@ -5,6 +5,8 @@ import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.exceptions.NotFoundException;
 import io.haileab.beerservice.repository.BeerRepo;
 import io.haileab.beerservice.web.mapper.BeerMapper;
+import io.haileab.beerservice.web.mapper.BeerMapperType;
+import io.haileab.beerservice.web.mapper.BeerMapperWithDecorator;
 import io.haileab.beerservice.web.model.BeerDTO;
 import io.haileab.beerservice.web.model.BeerPagedList;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +14,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 import java.util.List;
@@ -23,10 +24,12 @@ import java.util.UUID;
 public class BeerServiceImpl implements BeerService{
     private final BeerRepo beerRepo;
     private final BeerMapper beerMapper;
+    private final BeerMapperWithDecorator beerMapperWithDecorator;
     @Override
-    public BeerDTO getById(UUID beerId) {
+    public BeerDTO getById(UUID beerId, boolean showInventory) {
         Beer beer = beerRepo.findById(beerId).orElseThrow(NotFoundException::new);
-        return beerMapper.toBeerDto(beer);
+        BeerMapperType mapperToUse = showInventory ? beerMapperWithDecorator : beerMapper;
+        return mapperToUse.toBeerDto(beer);
     }
 
     @Override
@@ -54,7 +57,12 @@ public class BeerServiceImpl implements BeerService{
     }
 
     @Override
-    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest) {
+    public BeerPagedList listBeers(
+            String beerName,
+            BeerStyleEnum beerStyle,
+            PageRequest pageRequest,
+            boolean showInventory
+    ) {
         Page<Beer> beerPage;
         if(!ObjectUtils.isEmpty(beerName) && !ObjectUtils.isEmpty(beerStyle)){
             beerPage = beerRepo.findBeerByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
@@ -66,8 +74,10 @@ public class BeerServiceImpl implements BeerService{
             beerPage = beerRepo.findAll(pageRequest);
         }
 
+        BeerMapperType mapperToUse = showInventory ? beerMapperWithDecorator : beerMapper;
+
         List<BeerDTO> beerDTOList = beerPage.stream()
-                .map(beerMapper::toBeerDto)
+                .map(mapperToUse::toBeerDto)
                 .toList();
 
 

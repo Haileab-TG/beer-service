@@ -3,14 +3,11 @@ package io.haileab.beerservice.web.mapper;
 import io.haileab.beerservice.RESTclient.inventory.BeerInventoryRestTemplate;
 import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.web.model.BeerDTO;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class BeerMapperDecorator implements BeerMapper {
+public abstract class BeerMapperDecorator implements BeerMapperWithDecorator {
     private  BeerInventoryRestTemplate beerInventoryRestTemplate;
     private  BeerMapper beerMapper;
 

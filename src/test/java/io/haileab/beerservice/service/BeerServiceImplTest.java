@@ -14,9 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -76,7 +74,7 @@ class BeerServiceImplTest {
         given(beerRepo.findById(beer.getId())).willReturn(Optional.of(beer));
 
 
-        BeerDTO beerDTO = beerService.getById(beer.getId());
+        BeerDTO beerDTO = beerService.getById(beer.getId(), false);
 
         assertThat(beerDTO).isNotNull();
 
@@ -88,7 +86,7 @@ class BeerServiceImplTest {
 
 
         assertThrows(NotFoundException.class,
-                () -> beerService.getById(beer.getId())
+                () -> beerService.getById(beer.getId(), false)
                 );
     }
 

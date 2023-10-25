@@ -66,7 +66,7 @@ public class BeerLoader implements CommandLineRunner {
                 .build();
         Beer beerSaved = beerRepo.save(beer);
         System.out.println("Saved beer id " + beerSaved.getId());
-        beerService.getById(beerSaved.getId());
+        beerService.getById(beerSaved.getId(), false);
     }
 
 }

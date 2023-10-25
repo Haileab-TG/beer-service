@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RequestMapping("api/v1/beer")
@@ -25,9 +24,13 @@ public class BeerController {
     private static final Integer DEFAULT_PAGE_NUMBER = 0;
     private static final Integer DEFAULT_PAGE_SIZE = 25;
 
+
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDTO> getBeerById(@NotNull @PathVariable("beerId") UUID beerId){
-        return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
+    public ResponseEntity<BeerDTO> getBeerById(
+            @NotNull @PathVariable("beerId") UUID beerId,
+            @RequestParam(value="showInventory", required=false) boolean showInventory
+    ){
+        return new ResponseEntity<>(beerService.getById(beerId, showInventory), HttpStatus.OK);
     }
 
     @PostMapping
@@ -52,14 +55,16 @@ public class BeerController {
             @RequestParam(value = "pageNumber",required = false) Integer pageNumber,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "beerName", required = false) String beerName,
-            @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyleEnum
+            @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyleEnum,
+            @RequestParam(value="showInventory", required=false) boolean showInventory
         ){
         pageNumber = pageNumber == null || pageNumber < 0 ? DEFAULT_PAGE_NUMBER : pageNumber;
         pageSize = pageSize == null || pageSize < 0 ? DEFAULT_PAGE_SIZE : pageSize;
 
         BeerPagedList beerPagedList = beerService.listBeers(
                 beerName, beerStyleEnum,
-                PageRequest.of(pageNumber, pageSize)
+                PageRequest.of(pageNumber, pageSize),
+                showInventory
         );
 
         return new ResponseEntity<>(beerPagedList, HttpStatus.OK);
