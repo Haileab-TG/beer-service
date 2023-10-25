@@ -1,14 +1,21 @@
 package io.haileab.beerservice.service;
 
+import io.haileab.beerservice.bootstrap.BeerStyleEnum;
 import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.exceptions.NotFoundException;
 import io.haileab.beerservice.repository.BeerRepo;
 import io.haileab.beerservice.web.mapper.BeerMapper;
 import io.haileab.beerservice.web.model.BeerDTO;
+import io.haileab.beerservice.web.model.BeerPagedList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -43,6 +50,31 @@ public class BeerServiceImpl implements BeerService{
 
         return beerMapper.toBeerDto(
                 beerRepo.save(beerInDB)
+        );
+    }
+
+    @Override
+    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest) {
+        Page<Beer> beerPage;
+        if(!ObjectUtils.isEmpty(beerName) && !ObjectUtils.isEmpty(beerStyle)){
+            beerPage = beerRepo.findBeerByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
+        }else if(!ObjectUtils.isEmpty(beerName) && ObjectUtils.isEmpty(beerStyle)){
+            beerPage = beerRepo.findBeerByBeerName(beerName, pageRequest);
+        }else if(ObjectUtils.isEmpty(beerName) && !ObjectUtils.isEmpty(beerStyle)){
+            beerPage = beerRepo.findBeerByBeerStyle(beerStyle, pageRequest);
+        }else {
+            beerPage = beerRepo.findAll(pageRequest);
+        }
+
+        List<BeerDTO> beerDTOList = beerPage.stream()
+                .map(beerMapper::toBeerDto)
+                .toList();
+
+
+        return new BeerPagedList(
+              beerDTOList,
+                PageRequest.of(beerPage.getPageable().getPageNumber(), beerPage.getPageable().getPageSize()),
+                beerPage.getTotalElements()
         );
     }
 }
