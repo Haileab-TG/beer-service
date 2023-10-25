@@ -20,4 +20,6 @@ public interface BeerService {
             PageRequest pageRequest,
             boolean showInventory
     );
+
+    BeerDTO getBeerByUPC(Long upc, boolean showInventory);
 }

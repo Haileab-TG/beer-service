@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Currency;
 import org.hibernate.validator.constraints.Mod10Check;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -20,7 +22,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDTO {
+public class BeerDTO implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 871662316799140343L;
     @Null
     private UUID id;
     @Null

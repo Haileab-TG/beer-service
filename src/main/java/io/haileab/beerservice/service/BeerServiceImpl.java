@@ -10,6 +10,7 @@ import io.haileab.beerservice.web.mapper.BeerMapperWithDecorator;
 import io.haileab.beerservice.web.model.BeerDTO;
 import io.haileab.beerservice.web.model.BeerPagedList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,11 @@ public class BeerServiceImpl implements BeerService{
     private final BeerRepo beerRepo;
     private final BeerMapper beerMapper;
     private final BeerMapperWithDecorator beerMapperWithDecorator;
+
+//    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventory == false")
     @Override
     public BeerDTO getById(UUID beerId, boolean showInventory) {
+        System.out.println("I was called");
         Beer beer = beerRepo.findById(beerId).orElseThrow(NotFoundException::new);
         BeerMapperType mapperToUse = showInventory ? beerMapperWithDecorator : beerMapper;
         return mapperToUse.toBeerDto(beer);
@@ -56,6 +60,7 @@ public class BeerServiceImpl implements BeerService{
         );
     }
 
+//    @Cacheable(cacheNames = "beerListCache", condition = "#showInventory == false")
     @Override
     public BeerPagedList listBeers(
             String beerName,
@@ -63,6 +68,7 @@ public class BeerServiceImpl implements BeerService{
             PageRequest pageRequest,
             boolean showInventory
     ) {
+        System.out.println("I was called");
         Page<Beer> beerPage;
         if(!ObjectUtils.isEmpty(beerName) && !ObjectUtils.isEmpty(beerStyle)){
             beerPage = beerRepo.findBeerByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
@@ -86,5 +92,11 @@ public class BeerServiceImpl implements BeerService{
                 PageRequest.of(beerPage.getPageable().getPageNumber(), beerPage.getPageable().getPageSize()),
                 beerPage.getTotalElements()
         );
+    }
+
+    @Override
+    public BeerDTO getBeerByUPC(Long upc, boolean showInventory) {
+        BeerMapperType mapperToUse = showInventory ? beerMapperWithDecorator : beerMapper;
+        return mapperToUse.toBeerDto(beerRepo.findBeerByUpc(upc));
     }
 }

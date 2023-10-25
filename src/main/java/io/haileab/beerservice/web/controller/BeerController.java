@@ -25,6 +25,14 @@ public class BeerController {
     private static final Integer DEFAULT_PAGE_SIZE = 25;
 
 
+    @GetMapping("/beerByUpc/{upc}")
+    public ResponseEntity<BeerDTO> getBeerByUPC(
+            @NotNull @PathVariable("upc") Long upc,
+            @RequestParam(value = "showInventory",  required = false) boolean showInventory
+    ){
+        return new ResponseEntity<>(beerService.getBeerByUPC(upc, showInventory), HttpStatus.OK);
+    }
+
     @GetMapping("/{beerId}")
     public ResponseEntity<BeerDTO> getBeerById(
             @NotNull @PathVariable("beerId") UUID beerId,

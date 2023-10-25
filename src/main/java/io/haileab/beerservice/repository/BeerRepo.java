@@ -14,4 +14,5 @@ public interface BeerRepo extends JpaRepository<Beer, UUID> {
     Page<Beer> findBeerByBeerStyle(BeerStyleEnum beerStyle, Pageable pageable);
 
     Page<Beer> findBeerByBeerNameAndBeerStyle(String beerName, BeerStyleEnum beerStyle, Pageable pageable);
+    Beer findBeerByUpc(Long upc);
 }
