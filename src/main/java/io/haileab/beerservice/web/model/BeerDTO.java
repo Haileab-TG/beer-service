@@ -1,6 +1,6 @@
 package io.haileab.beerservice.web.model;
 
-import io.haileab.beerservice.bootstrap.BeerStyleEnum;
+import io.haileab.beerservice.domain.BeerStyleEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
@@ -9,8 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Currency;
-import org.hibernate.validator.constraints.Mod10Check;
 
 import java.io.Serial;
 import java.io.Serializable;

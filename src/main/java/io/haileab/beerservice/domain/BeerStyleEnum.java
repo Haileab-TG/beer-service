@@ -1,4 +1,4 @@
-package io.haileab.beerservice.bootstrap;
+package io.haileab.beerservice.domain;
 
 import java.util.UUID;
 

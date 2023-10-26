@@ -1,10 +1,9 @@
 package io.haileab.beerservice.service;
 
-import io.haileab.beerservice.bootstrap.BeerStyleEnum;
+import io.haileab.beerservice.domain.BeerStyleEnum;
 import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.exceptions.NotFoundException;
 import io.haileab.beerservice.repository.BeerRepo;
-import io.haileab.beerservice.web.mapper.BeerMapper;
 import io.haileab.beerservice.web.mapper.BeerMapperImpl;
 import io.haileab.beerservice.web.mapper.DateMapper;
 import io.haileab.beerservice.web.model.BeerDTO;
@@ -45,7 +44,7 @@ class BeerServiceImplTest {
                 .id(UUID.randomUUID())
                 .beerName("Asmera bira")
                 .beerStyle(BeerStyleEnum.ALE)
-                .upc(123456789L)
+                .upc("123456789")
                 .price(new BigDecimal("12.0"))
                 .quantityOnHand(12)
                 .build();
@@ -53,7 +52,7 @@ class BeerServiceImplTest {
                 .id(UUID.randomUUID())
                 .beerName("Asmera bira")
                 .beerStyle(BeerStyleEnum.ALE)
-                .upc(123456789L)
+                .upc("123456789")
                 .price(new BigDecimal("12.0"))
                 .quantityOnHand(12)
                 .build();

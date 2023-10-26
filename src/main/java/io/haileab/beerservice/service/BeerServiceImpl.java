@@ -1,6 +1,6 @@
 package io.haileab.beerservice.service;
 
-import io.haileab.beerservice.bootstrap.BeerStyleEnum;
+import io.haileab.beerservice.domain.BeerStyleEnum;
 import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.exceptions.NotFoundException;
 import io.haileab.beerservice.repository.BeerRepo;
@@ -10,7 +10,6 @@ import io.haileab.beerservice.web.mapper.BeerMapperWithDecorator;
 import io.haileab.beerservice.web.model.BeerDTO;
 import io.haileab.beerservice.web.model.BeerPagedList;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package io.haileab.beerservice.web.controller;
 
-import io.haileab.beerservice.bootstrap.BeerStyleEnum;
+import io.haileab.beerservice.domain.BeerStyleEnum;
 import io.haileab.beerservice.service.BeerService;
 import io.haileab.beerservice.web.model.BeerDTO;
 import io.haileab.beerservice.web.model.BeerPagedList;
