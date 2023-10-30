@@ -35,6 +35,7 @@ public class BrewingService {
                         new BrewingBeerEvent(beerMapper.toBeerDto(beer))
                     );
                 log.debug("Brewing-request message sent for " + beer.getId());
+                System.out.println("Brewing-request message sent for " + beer.getId());
             }
         });
     }
