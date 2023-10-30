@@ -17,12 +17,12 @@ import java.util.UUID;
 @Slf4j
 @ConfigurationProperties(prefix = "htg.brewery", ignoreInvalidFields = false)
 @Component
-public class BeerInventoryRestTemplateImpl implements BeerInventoryRestTemplate{
+public class BeerInventoryServiceImpl implements BeerInventoryService {
     private final String INVENTORY_SERVICE_PATH = "/api/v1/beer/{beerId}/inventory";
     private final RestTemplate restTemplate;
     private String beerInventoryServiceHost;
 
-    public BeerInventoryRestTemplateImpl(RestTemplateBuilder restTemplateBuilder) {
+    public BeerInventoryServiceImpl(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 

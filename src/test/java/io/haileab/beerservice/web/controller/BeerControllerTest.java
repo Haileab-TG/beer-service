@@ -3,9 +3,6 @@ package io.haileab.beerservice.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.haileab.beerservice.domain.BeerStyleEnum;
 import io.haileab.beerservice.web.model.BeerDTO;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -39,7 +36,7 @@ class BeerControllerTest {
                 .beerStyle(BeerStyleEnum.IPA)
                 .upc("455879965")
                 .price(new BigDecimal(12))
-                .quantityOnHand(52)
+                .minOnHand(52)
                 .build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDTO);
 
@@ -56,7 +53,7 @@ class BeerControllerTest {
                 .beerStyle(BeerStyleEnum.IPA)
                 .upc("455879965")
                 .price(new BigDecimal(12))
-                .quantityOnHand(52)
+                .minOnHand(52)
                 .build();
         String beerDtoJson = objectMapper.writeValueAsString(beerDTO);
 

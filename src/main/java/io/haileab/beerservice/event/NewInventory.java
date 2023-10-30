@@ -1,7 +1,9 @@
 package io.haileab.beerservice.event;
 
-import lombok.experimental.SuperBuilder;
+import io.haileab.beerservice.web.model.BeerDTO;
 
-@SuperBuilder
 public class NewInventory extends BeerEvent{
+    public NewInventory(BeerDTO beerDTO) {
+        super(beerDTO);
+    }
 }

@@ -46,7 +46,7 @@ class BeerServiceImplTest {
                 .beerStyle(BeerStyleEnum.ALE)
                 .upc("123456789")
                 .price(new BigDecimal("12.0"))
-                .quantityOnHand(12)
+                .minOnHand(12)
                 .build();
         beer = Beer.builder()
                 .id(UUID.randomUUID())

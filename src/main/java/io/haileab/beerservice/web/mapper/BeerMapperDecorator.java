@@ -1,6 +1,6 @@
 package io.haileab.beerservice.web.mapper;
 
-import io.haileab.beerservice.RESTclient.inventory.BeerInventoryRestTemplate;
+import io.haileab.beerservice.RESTclient.inventory.BeerInventoryService;
 import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.web.model.BeerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public abstract class BeerMapperDecorator implements BeerMapperWithDecorator {
-    private  BeerInventoryRestTemplate beerInventoryRestTemplate;
+    private BeerInventoryService beerInventoryService;
     private  BeerMapper beerMapper;
 
     @Override
     public BeerDTO toBeerDto(Beer beer) {
         BeerDTO beerDTO = beerMapper.toBeerDto(beer);
-        beerDTO.setQuantityOnHand(beerInventoryRestTemplate.getBeerQuantityOnHand(beer.getId()));
+        beerDTO.setMinOnHand(beerInventoryService.getBeerQuantityOnHand(beer.getId()));
         return beerDTO;
     }
 
@@ -24,8 +24,8 @@ public abstract class BeerMapperDecorator implements BeerMapperWithDecorator {
     }
 
     @Autowired
-    public void setBeerInventoryRestTemplate(BeerInventoryRestTemplate beerInventoryRestTemplate) {
-        this.beerInventoryRestTemplate = beerInventoryRestTemplate;
+    public void setBeerInventoryRestTemplate(BeerInventoryService beerInventoryService) {
+        this.beerInventoryService = beerInventoryService;
     }
 
     @Autowired

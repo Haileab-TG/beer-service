@@ -3,7 +3,6 @@ package io.haileab.beerservice.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.*;
-import org.hibernate.dialect.VarcharUUIDJdbcType;
 import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
@@ -44,7 +43,7 @@ public class Beer {
     private String upc;
 
     private BigDecimal price;
-    private Integer quantityOnHand;
+    private Integer minOnHand;
     private Integer quantityToBrew;
 
 }

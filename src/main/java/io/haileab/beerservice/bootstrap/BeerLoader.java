@@ -39,7 +39,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(BeerStyleEnum.ALE)
                             .upc(UPC_1)
                             .price(new BigDecimal("6.23"))
-                            .quantityOnHand(56)
+                            .minOnHand(56)
                             .quantityToBrew(200)
                             .build(),
                     Beer.builder()
@@ -47,7 +47,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(BeerStyleEnum.ALE)
                             .upc(UPC_2)
                             .price(new BigDecimal("12.95"))
-                            .quantityOnHand(56)
+                            .minOnHand(56)
                             .quantityToBrew(200)
                             .build(),
                     Beer.builder()
@@ -55,7 +55,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(BeerStyleEnum.ALE)
                             .upc(UPC_3)
                             .price(new BigDecimal("14.45"))
-                            .quantityOnHand(56)
+                            .minOnHand(56)
                             .quantityToBrew(200)
                             .build()
             );
