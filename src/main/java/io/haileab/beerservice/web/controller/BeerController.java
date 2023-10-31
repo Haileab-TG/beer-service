@@ -38,7 +38,7 @@ public class BeerController {
             @NotNull @PathVariable("beerId") UUID beerId,
             @RequestParam(value="showInventory", required=false) boolean showInventory
     ){
-        return new ResponseEntity<>(beerService.getById(beerId, showInventory), HttpStatus.OK);
+        return new ResponseEntity<>(beerService.getBeerDtoById(beerId, showInventory), HttpStatus.OK);
     }
 
     @PostMapping

@@ -40,7 +40,7 @@ public class BeerLoader implements CommandLineRunner {
                             .upc(UPC_1)
                             .price(new BigDecimal("6.23"))
                             .minOnHand(56)
-                            .quantityToBrew(200)
+                            .quantityToBrew(3)
                             .build(),
                     Beer.builder()
                             .beerName("Galaxy Cat")
@@ -48,7 +48,7 @@ public class BeerLoader implements CommandLineRunner {
                             .upc(UPC_2)
                             .price(new BigDecimal("12.95"))
                             .minOnHand(56)
-                            .quantityToBrew(200)
+                            .quantityToBrew(3)
                             .build(),
                     Beer.builder()
                             .beerName("Pinball Porter")
@@ -56,7 +56,7 @@ public class BeerLoader implements CommandLineRunner {
                             .upc(UPC_3)
                             .price(new BigDecimal("14.45"))
                             .minOnHand(56)
-                            .quantityToBrew(200)
+                            .quantityToBrew(2)
                             .build()
             );
             beerRepo.saveAllAndFlush(bootstrapBeers);
@@ -66,7 +66,7 @@ public class BeerLoader implements CommandLineRunner {
     private void getByIdTest() {
         Beer beer = beerRepo.findBeerByUpc(UPC_1);
         System.out.println("Saved beer id " + beer.getId());
-        beerService.getById(beer.getId(), false);
+        beerService.getBeerDtoById(beer.getId(), false);
     }
 
 }

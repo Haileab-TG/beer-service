@@ -73,7 +73,7 @@ class BeerServiceImplTest {
         given(beerRepo.findById(beer.getId())).willReturn(Optional.of(beer));
 
 
-        BeerDTO beerDTO = beerService.getById(beer.getId(), false);
+        BeerDTO beerDTO = beerService.getBeerDtoById(beer.getId(), false);
 
         assertThat(beerDTO).isNotNull();
 
@@ -85,7 +85,7 @@ class BeerServiceImplTest {
 
 
         assertThrows(NotFoundException.class,
-                () -> beerService.getById(beer.getId(), false)
+                () -> beerService.getBeerDtoById(beer.getId(), false)
                 );
     }
 

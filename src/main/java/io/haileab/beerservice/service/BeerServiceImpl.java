@@ -28,11 +28,16 @@ public class BeerServiceImpl implements BeerService{
 
 //    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventory == false")
     @Override
-    public BeerDTO getById(UUID beerId, boolean showInventory) {
+    public BeerDTO getBeerDtoById(UUID beerId, boolean showInventory) {
         System.out.println("I was called");
-        Beer beer = beerRepo.findById(beerId).orElseThrow(NotFoundException::new);
+        Beer beer = getBeerById(beerId);
         BeerMapperType mapperToUse = showInventory ? beerMapperWithDecorator : beerMapper;
         return mapperToUse.toBeerDto(beer);
+    }
+
+    @Override
+    public Beer getBeerById(UUID beerId) {
+        return beerRepo.findById(beerId).orElseThrow(NotFoundException::new);
     }
 
     @Override
@@ -46,7 +51,7 @@ public class BeerServiceImpl implements BeerService{
 
     @Override
     public BeerDTO updateById(UUID beerId, BeerDTO beerDTO) {
-        Beer beerInDB = beerRepo.findById(beerId).orElseThrow(NotFoundException::new);
+        Beer beerInDB = getBeerById(beerId);
         beerInDB.setBeerName(beerDTO.getBeerName());
         beerInDB.setBeerStyle(beerDTO.getBeerStyle());
         beerInDB.setPrice(beerDTO.getPrice());

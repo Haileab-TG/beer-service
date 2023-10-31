@@ -1,6 +1,5 @@
 package io.haileab.beerservice.web.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.haileab.beerservice.domain.BeerStyleEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -51,4 +50,7 @@ public class BeerDTO implements Serializable {
     @Positive
     @NotNull
     private Integer minOnHand;
+
+    @Positive
+    private Integer quantityOnHand;
 }

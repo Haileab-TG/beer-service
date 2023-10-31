@@ -1,4 +1,4 @@
-package io.haileab.beerservice.service;
+package io.haileab.beerservice.service.brewing;
 
 import io.haileab.beerservice.RESTclient.inventory.BeerInventoryService;
 import io.haileab.beerservice.config.JmsConfig;

@@ -1,5 +1,6 @@
 package io.haileab.beerservice.service;
 
+import io.haileab.beerservice.domain.Beer;
 import io.haileab.beerservice.domain.BeerStyleEnum;
 import io.haileab.beerservice.web.model.BeerDTO;
 import io.haileab.beerservice.web.model.BeerPagedList;
@@ -10,7 +11,8 @@ import java.util.UUID;
 
 @Service
 public interface BeerService {
-    BeerDTO getById(UUID beerId, boolean showInventory);
+    BeerDTO getBeerDtoById(UUID beerId, boolean showInventory);
+    Beer getBeerById(UUID beerId);
 
     BeerDTO save(BeerDTO beerDTO);
 

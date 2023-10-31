@@ -5,7 +5,8 @@ import lombok.*;
 
 @Data
 @Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class BeerEvent{
-    private final BeerDTO beerDTO;
+    private  BeerDTO beerDTO;
 }
