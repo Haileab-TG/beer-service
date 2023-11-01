@@ -2,8 +2,8 @@ package io.haileab.beerservice.service.brewing;
 
 import io.haileab.beerservice.config.JmsConfig;
 import io.haileab.beerservice.domain.Beer;
-import io.haileab.beerservice.event.BrewingBeerEvent;
-import io.haileab.beerservice.event.NewInventoryEvent;
+import common.event.BrewingBeerEvent;
+import common.event.NewInventoryEvent;
 import io.haileab.beerservice.service.BeerService;
 import io.haileab.beerservice.web.model.BeerDTO;
 import lombok.RequiredArgsConstructor;

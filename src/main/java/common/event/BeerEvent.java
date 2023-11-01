@@ -1,4 +1,4 @@
-package io.haileab.beerservice.event;
+package common.event;
 
 import io.haileab.beerservice.web.model.BeerDTO;
 import lombok.*;

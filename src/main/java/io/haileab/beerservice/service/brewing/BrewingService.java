@@ -3,7 +3,7 @@ package io.haileab.beerservice.service.brewing;
 import io.haileab.beerservice.RESTclient.inventory.BeerInventoryService;
 import io.haileab.beerservice.config.JmsConfig;
 import io.haileab.beerservice.domain.Beer;
-import io.haileab.beerservice.event.BrewingBeerEvent;
+import common.event.BrewingBeerEvent;
 import io.haileab.beerservice.repository.BeerRepo;
 import io.haileab.beerservice.web.mapper.BeerMapper;
 import lombok.RequiredArgsConstructor;

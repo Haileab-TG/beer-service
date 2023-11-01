@@ -1,11 +1,11 @@
-package io.haileab.beerservice.event;
+package common.event;
 
 import io.haileab.beerservice.web.model.BeerDTO;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class BrewingBeerEvent extends BeerEvent{
-    public BrewingBeerEvent(BeerDTO beerDTO) {
+public class NewInventoryEvent extends BeerEvent{
+    public NewInventoryEvent(BeerDTO beerDTO) {
         super(beerDTO);
     }
 }
