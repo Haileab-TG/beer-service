@@ -1,6 +1,6 @@
 package io.haileab.beerservice.RESTclient.inventory;
 
-import io.haileab.beerservice.RESTclient.inventory.model.BeerInventoryDto;
+import common.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
