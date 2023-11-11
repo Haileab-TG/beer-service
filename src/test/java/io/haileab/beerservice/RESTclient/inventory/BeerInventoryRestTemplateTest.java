@@ -9,13 +9,13 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class BeerInventoryServiceImplTest {
+class BeerInventoryRestTemplateTest {
     @Autowired
-    BeerInventoryService beerInventoryService;
+    BeerInventoryServiceRestClient beerInventoryServiceRestClient;
 
     @Test
     void getBeerQuantityOnHand() {
-        Integer qoh = beerInventoryService.getBeerQuantityOnHand(UUID.fromString("026cc3c8-3a0c-4083-a05b-e908048c1b08"));
+        Integer qoh = beerInventoryServiceRestClient.getBeerQuantityOnHand(UUID.fromString("026cc3c8-3a0c-4083-a05b-e908048c1b08"));
         assertThat(qoh).isNotNull();
         System.out.println("Quntity on hand " + qoh );
 

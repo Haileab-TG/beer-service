@@ -1,6 +1,6 @@
 package io.haileab.beerservice.service.brewing;
 
-import io.haileab.beerservice.RESTclient.inventory.BeerInventoryService;
+import io.haileab.beerservice.RESTclient.inventory.BeerInventoryServiceRestClient;
 import io.haileab.beerservice.config.JmsConfig;
 import io.haileab.beerservice.domain.Beer;
 import common.event.BrewingBeerEvent;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BrewingService {
     private final BeerRepo beerRepo;
-    private final BeerInventoryService beerInventoryService;
+    private final BeerInventoryServiceRestClient beerInventoryServiceRestClient;
     private final JmsTemplate jmsClient;
     private final BeerMapper beerMapper;
 
@@ -28,7 +28,7 @@ public class BrewingService {
     public void lookingToBrew(){
         List<Beer> beers = beerRepo.findAll();
         beers.forEach((beer)-> {
-            Integer quantityOnHand = beerInventoryService.getBeerQuantityOnHand(beer.getId());
+            Integer quantityOnHand = beerInventoryServiceRestClient.getBeerQuantityOnHand(beer.getId());
             if(quantityOnHand < beer.getMinOnHand()){
                 jmsClient.convertAndSend(
                         JmsConfig.BREWING_REQUEST_QUEUE,

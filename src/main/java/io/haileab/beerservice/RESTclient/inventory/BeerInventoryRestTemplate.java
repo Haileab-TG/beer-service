@@ -4,6 +4,7 @@ import common.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -14,21 +15,22 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Profile("!local-discovery")
 @Slf4j
 @ConfigurationProperties(prefix = "htg.brewery", ignoreInvalidFields = false)
 @Component
-public class BeerInventoryServiceImpl implements BeerInventoryService {
-    private final String INVENTORY_SERVICE_PATH = "/api/v1/beer/{beerId}/inventory";
+public class BeerInventoryRestTemplate implements BeerInventoryServiceRestClient {
+    public static final String INVENTORY_SERVICE_PATH = "/api/v1/beer/{beerId}/inventory";
     private final RestTemplate restTemplate;
     private String beerInventoryServiceHost;
 
-    public BeerInventoryServiceImpl(RestTemplateBuilder restTemplateBuilder) {
+    public BeerInventoryRestTemplate(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
     @Override
     public Integer getBeerQuantityOnHand(UUID beerId) {
-        log.debug("Calling Inventory service");
+        log.debug("BeerInventoryRestTemplate -> getBeerQuantityOnHand : Calling Inventory service using REST TEMPLATE");
         ResponseEntity<List<BeerInventoryDto>> responseEntity = restTemplate.exchange(
                 beerInventoryServiceHost + INVENTORY_SERVICE_PATH,
                 HttpMethod.GET,
