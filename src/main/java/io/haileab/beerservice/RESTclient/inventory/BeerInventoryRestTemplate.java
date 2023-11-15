@@ -2,6 +2,7 @@ package io.haileab.beerservice.RESTclient.inventory;
 
 import common.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Profile;
@@ -17,15 +18,21 @@ import java.util.UUID;
 
 @Profile("!local-discovery")
 @Slf4j
-@ConfigurationProperties(prefix = "htg.brewery", ignoreInvalidFields = false)
+@ConfigurationProperties(prefix = "htg.brewery", ignoreInvalidFields = true)
 @Component
 public class BeerInventoryRestTemplate implements BeerInventoryServiceRestClient {
     public static final String INVENTORY_SERVICE_PATH = "/api/v1/beer/{beerId}/inventory";
     private final RestTemplate restTemplate;
     private String beerInventoryServiceHost;
 
-    public BeerInventoryRestTemplate(RestTemplateBuilder restTemplateBuilder) {
-        this.restTemplate = restTemplateBuilder.build();
+    public BeerInventoryRestTemplate(
+            RestTemplateBuilder restTemplateBuilder,
+            @Value("${htg.brewery.inventory-username}") String username,
+            @Value("${htg.brewery.inventory-password}") String password
+    ) {
+        this.restTemplate = restTemplateBuilder
+                .basicAuthentication(username, password)
+                .build();
     }
 
     @Override
